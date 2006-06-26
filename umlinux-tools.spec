@@ -1,5 +1,6 @@
+# TODO: optflags
 Summary:	User Mode Linux tools
-Summary(pl):	Narzêdzia dla Linuksa w przestrzeni u¿ytkownika.
+Summary(pl):	Narzêdzia dla Linuksa w przestrzeni u¿ytkownika
 Name:		umlinux-tools
 Version:	20060323
 Release:	0.1
@@ -20,21 +21,23 @@ User Mode Linux tools.
 Narzêdzia dla Linuksa w przestrzeni u¿ytkownika.
 
 %prep
-%setup  -q -n tools-%{version}
+%setup -q -n tools-%{version}
 
 %build
 %{__make}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-%{__make} DESTDIR=$RPM_BUILD_ROOT install
+
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%dir %{_libdir}/uml
 %attr(755,root,root) %{_bindir}/*
 %attr(755,root,root) %{_sbindir}/*
+%dir %{_libdir}/uml
 %attr(755,root,root) %{_libdir}/uml/port-helper
