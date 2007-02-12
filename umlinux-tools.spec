@@ -1,6 +1,6 @@
 # TODO: optflags
 Summary:	User Mode Linux tools
-Summary(pl):	Narzêdzia dla Linuksa w przestrzeni u¿ytkownika
+Summary(pl.UTF-8):   NarzÄ™dzia dla Linuksa w przestrzeni uÅ¼ytkownika
 Name:		umlinux-tools
 Version:	20060323
 Release:	0.1
@@ -17,8 +17,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %description
 User Mode Linux tools.
 
-%description -l pl
-Narzêdzia dla Linuksa w przestrzeni u¿ytkownika.
+%description -l pl.UTF-8
+NarzÄ™dzia dla Linuksa w przestrzeni uÅ¼ytkownika.
 
 %prep
 %setup -q -n tools-%{version}
