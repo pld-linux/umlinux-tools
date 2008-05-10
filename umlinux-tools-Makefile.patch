@@ -1,0 +1,151 @@
+diff -Nur tools-20070815/humfsify/Makefile n.tools-20070815/humfsify/Makefile
+--- tools-20070815/humfsify/Makefile	2006-05-25 20:37:01.000000000 +0200
++++ n.tools-20070815/humfsify/Makefile	2008-05-10 20:01:12.000000000 +0200
+@@ -4,7 +4,7 @@
+ 
+ install:
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -o 0755 $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+ 
+ clean:
+ 	rm -f *~
+diff -Nur tools-20070815/jail/Makefile n.tools-20070815/jail/Makefile
+--- tools-20070815/jail/Makefile	2006-02-27 20:51:46.000000000 +0100
++++ n.tools-20070815/jail/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -11,7 +11,7 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(SBIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(SBIN_DIR)
++	install $(BIN) $(DESTDIR)$(SBIN_DIR)
+ 
+ clean :
+ 	rm -rf *~ $(BIN) $(OBJS) cell[0-9]* core* tty_log_cell*
+diff -Nur tools-20070815/jailtest/Makefile n.tools-20070815/jailtest/Makefile
+--- tools-20070815/jailtest/Makefile	2006-02-27 20:52:53.000000000 +0100
++++ n.tools-20070815/jailtest/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -14,4 +14,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/Makefile n.tools-20070815/Makefile
+--- tools-20070815/Makefile	2006-02-27 20:38:55.000000000 +0100
++++ n.tools-20070815/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -12,9 +12,6 @@
+ LIB_DIR = /usr/lib/uml
+ endif
+ 
+-CFLAGS = -g -Wall
+-#CFLAGS = -g -O2 -Wall
+-
+ export BIN_DIR LIB_DIR CFLAGS
+ 
+ all install: 
+diff -Nur tools-20070815/mconsole/Makefile n.tools-20070815/mconsole/Makefile
+--- tools-20070815/mconsole/Makefile	2006-02-27 21:03:01.000000000 +0100
++++ n.tools-20070815/mconsole/Makefile	2008-05-10 19:49:14.000000000 +0200
+@@ -1,7 +1,7 @@
+ BIN = uml_mconsole
+ OBJS = $(BIN).o
+ CFLAGS ?= -g -Wall
+-LIBS = ../lib/libuml.a -lreadline -lncurses
++override LIBS += $(LDFLAGS) ../lib/libuml.a -lreadline -lncurses
+ 
+ BIN_DIR ?= /usr/bin
+ 
+@@ -15,4 +15,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/moo/Makefile n.tools-20070815/moo/Makefile
+--- tools-20070815/moo/Makefile	2006-02-27 21:08:49.000000000 +0100
++++ n.tools-20070815/moo/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -23,4 +23,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/port-helper/Makefile n.tools-20070815/port-helper/Makefile
+--- tools-20070815/port-helper/Makefile	2006-02-27 21:18:40.000000000 +0100
++++ n.tools-20070815/port-helper/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -15,4 +15,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(LIB_DIR)
+-	install -s $(BIN) $(DESTDIR)$(LIB_DIR)
++	install $(BIN) $(DESTDIR)$(LIB_DIR)
+diff -Nur tools-20070815/tunctl/Makefile n.tools-20070815/tunctl/Makefile
+--- tools-20070815/tunctl/Makefile	2006-02-27 21:19:52.000000000 +0100
++++ n.tools-20070815/tunctl/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -14,4 +14,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/umlfs/Makefile n.tools-20070815/umlfs/Makefile
+--- tools-20070815/umlfs/Makefile	2006-02-27 22:11:25.000000000 +0100
++++ n.tools-20070815/umlfs/Makefile	2008-05-10 20:02:03.000000000 +0200
+@@ -1,8 +1,8 @@
+ BIN = uml_mount
+ OBJS = $(BIN).o
+-# I have the FUSE headers in /usr/local/include
+-CFLAGS = -g -Wall -D_FILE_OFFSET_BITS=64 -I/usr/local/include
+-LIBS = -lfuse
++
++override CFLAGS += -D_FILE_OFFSET_BITS=64 
++override LIBS += $(LDFLAGS) -lfuse
+ 
+ BIN_DIR ?= /usr/bin
+ 
+@@ -16,4 +16,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/umlgdb/Makefile n.tools-20070815/umlgdb/Makefile
+--- tools-20070815/umlgdb/Makefile	2002-04-14 22:37:39.000000000 +0200
++++ n.tools-20070815/umlgdb/Makefile	2008-05-10 19:43:21.000000000 +0200
+@@ -2,7 +2,7 @@
+ 
+ install :
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -m 755 umlgdb $(DESTDIR)$(BIN_DIR)
++	install umlgdb $(DESTDIR)$(BIN_DIR)
+ 
+ clean :
+ 	rm -f *~
+diff -Nur tools-20070815/uml_net/Makefile n.tools-20070815/uml_net/Makefile
+--- tools-20070815/uml_net/Makefile	2006-02-27 21:19:52.000000000 +0100
++++ n.tools-20070815/uml_net/Makefile	2008-05-10 19:43:12.000000000 +0200
+@@ -22,4 +22,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s -m 04755 $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/uml_switch/Makefile n.tools-20070815/uml_switch/Makefile
+--- tools-20070815/uml_switch/Makefile	2006-02-27 21:20:26.000000000 +0100
++++ n.tools-20070815/uml_switch/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -21,4 +21,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
+diff -Nur tools-20070815/watchdog/Makefile n.tools-20070815/watchdog/Makefile
+--- tools-20070815/watchdog/Makefile	2006-02-27 21:55:34.000000000 +0100
++++ n.tools-20070815/watchdog/Makefile	2008-05-10 19:41:54.000000000 +0200
+@@ -14,4 +14,4 @@
+ 
+ install : $(BIN)
+ 	install -d $(DESTDIR)$(BIN_DIR)
+-	install -s $(BIN) $(DESTDIR)$(BIN_DIR)
++	install $(BIN) $(DESTDIR)$(BIN_DIR)
