@@ -1,4 +1,3 @@
-# TODO: optflags
 Summary:	User Mode Linux tools
 Summary(pl.UTF-8):	Narzędzia dla Linuksa w przestrzeni użytkownika
 Name:		umlinux-tools
