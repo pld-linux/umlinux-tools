@@ -3,7 +3,7 @@ Summary(pl.UTF-8):	Narzędzia dla Linuksa w przestrzeni użytkownika
 Name:		umlinux-tools
 Version:	20070815
 Release:	0.1
-License:	GPL
+License:	GPL v2
 Group:		Applications/Emulators
 Source0:	http://user-mode-linux.sourceforge.net/uml_utilities_%{version}.tar.bz2
 # Source0-md5:	b0468ac8b79cef53f36f5f9517907462
@@ -42,6 +42,7 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_bindir}/*
-%attr(755,root,root) %{_sbindir}/*
+%attr(755,root,root) %{_sbindir}/jail_uml
 %dir %{_libdir}/uml
 %attr(755,root,root) %{_libdir}/uml/port-helper
+%doc Changelog
