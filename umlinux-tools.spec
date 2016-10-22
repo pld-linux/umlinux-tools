@@ -2,12 +2,13 @@ Summary:	User Mode Linux tools
 Summary(pl.UTF-8):	Narzędzia dla Linuksa w przestrzeni użytkownika
 Name:		umlinux-tools
 Version:	20070815
-Release:	3
+Release:	4
 License:	GPL v2
 Group:		Applications/Emulators
 Source0:	http://user-mode-linux.sourceforge.net/uml_utilities_%{version}.tar.bz2
 # Source0-md5:	b0468ac8b79cef53f36f5f9517907462
 Patch0:		%{name}-Makefile.patch
+Patch1:		no-hardcoded-libdir.patch
 URL:		http://user-mode-linux.sourceforge.net/
 BuildRequires:	libfuse-devel
 BuildRequires:	ncurses-devel
@@ -23,18 +24,21 @@ Narzędzia dla Linuksa w przestrzeni użytkownika.
 %prep
 %setup -q -n tools-%{version}
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} \
 	CC="%{__cc}" \
 	CFLAGS="%{rpmcflags} -Wall" \
-	LDFLAGS="%{rpmldflags}"
+	LDFLAGS="%{rpmldflags}" \
+	LIB_DIR=%{_libdir}/uml
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
 %{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
+	DESTDIR=$RPM_BUILD_ROOT \
+	LIB_DIR=%{_libdir}/uml
 
 %clean
 rm -rf $RPM_BUILD_ROOT
