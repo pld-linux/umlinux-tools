@@ -2,7 +2,7 @@ Summary:	User Mode Linux tools
 Summary(pl.UTF-8):	Narzędzia dla Linuksa w przestrzeni użytkownika
 Name:		umlinux-tools
 Version:	20070815
-Release:	4
+Release:	5
 License:	GPL v2
 Group:		Applications/Emulators
 Source0:	http://user-mode-linux.sourceforge.net/uml_utilities_%{version}.tar.bz2
