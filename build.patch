@@ -1,0 +1,10 @@
+--- tools-20070815/uml_net/host.c~	2006-02-27 21:19:52.000000000 +0100
++++ tools-20070815/uml_net/host.c	2019-10-20 13:29:37.428999642 +0200
+@@ -10,6 +10,7 @@
+ #include <ctype.h>
+ #include <sys/wait.h>
+ #include <sys/stat.h>
++#include <sys/sysmacros.h>
+ #include "output.h"
+ #include "host.h"
+ 
